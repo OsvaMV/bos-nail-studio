@@ -13,6 +13,9 @@ const CONFIG = {
   TIMEZONE: 'America/Mexico_City',
   DURATION_MIN: 120,          // duración de cada cita (debe coincidir con el sitio)
   LEAD_MIN: 60,               // anticipación mínima para citas del mismo día
+  OPEN_MIN: 8 * 60,           // primer horario: 8:00 am (debe coincidir con el sitio)
+  LAST_START_MIN: 19 * 60,    // última hora para iniciar: 7:00 pm (debe coincidir con el sitio)
+  STEP_MIN: 30,               // cada cuántos minutos hay un horario (debe coincidir con el sitio)
   OWNER_EMAIL: '',            // vacío = se avisa a la cuenta dueña de este script
   MAX_ACTIVE_PER_PHONE: 2,    // solicitudes futuras activas por número de celular
   RANGE_MAX_DAYS: 62,         // máximo de días que el sitio puede consultar de una vez
@@ -29,17 +32,10 @@ function toMinutes_(hhmm) { const [h, m] = hhmm.split(':').map(Number); return h
 function fromMinutes_(m) { return pad_(Math.floor(m / 60)) + ':' + pad_(m % 60); }
 function isISODate_(s) { return /^\d{4}-\d{2}-\d{2}$/.test(String(s || '')); }
 function isTime_(s) { return /^\d{2}:\d{2}$/.test(String(s || '')); }
-function weekdayOf_(iso) {
-  const [y, mo, d] = iso.split('-').map(Number);
-  return new Date(Date.UTC(y, mo - 1, d)).getUTCDay(); // 0 domingo … 6 sábado
-}
-
-// Entre semana: 7:00 y 16:00. Fin de semana: cada 30 min de 7:00 a 17:00.
-function slotsFor_(iso) {
-  const wd = weekdayOf_(iso);
-  if (wd !== 0 && wd !== 6) return ['07:00', '16:00'];
+// Todos los días, de OPEN_MIN a LAST_START_MIN, cada STEP_MIN minutos.
+function slotsFor_() {
   const out = [];
-  for (let m = 7 * 60; m <= 17 * 60; m += 30) out.push(fromMinutes_(m));
+  for (let m = CONFIG.OPEN_MIN; m <= CONFIG.LAST_START_MIN; m += CONFIG.STEP_MIN) out.push(fromMinutes_(m));
   return out;
 }
 
@@ -54,7 +50,7 @@ function overlaps_(start, booked, durationMin) {
 function validateRequest_(req, bookedThatDay, now, cfg) {
   if (!isISODate_(req.date) || !isTime_(req.time)) return 'invalid';
   if (req.date < now.date) return 'past';
-  if (slotsFor_(req.date).indexOf(req.time) === -1) return 'invalid_slot';
+  if (slotsFor_().indexOf(req.time) === -1) return 'invalid_slot';
   if (req.date === now.date && toMinutes_(req.time) < now.minutes + cfg.LEAD_MIN) return 'past';
   if (overlaps_(req.time, bookedThatDay, cfg.DURATION_MIN)) return 'taken';
   return null;

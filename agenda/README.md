@@ -49,14 +49,14 @@ La primera solicitud crea la pestaña **Citas** con estas columnas:
 - **Cuando confirmes por WhatsApp,** cambia el Estado a `Confirmada` (es opcional, pero ayuda a organizarte).
 - **Para liberar un horario,** cambia el Estado a `Cancelada` o `Rechazada`, o borra el renglón.
 - **Para bloquear un día o un rato** (vacaciones, cita personal), agrega un renglón a mano con Fecha, Hora, Termina y Estado `Bloqueado`.
-  - Fecha en formato `2026-10-20`, horas en formato `07:00`.
-  - Ejemplo de día completo: `2026-10-20` · `07:00` · `19:00` · `Bloqueado`.
+  - Fecha en formato `2026-10-20`, horas en formato `08:00`.
+  - Ejemplo de día completo: `2026-10-20` · `08:00` · `21:00` · `Bloqueado`.
 
 ## Reglas que aplica (en el sitio y también en el servidor)
 - **Fechas:** no se aceptan días pasados. Para el mismo día, solo horarios con al menos 1 hora de anticipación.
-- **Horarios:** entre semana solo 7:00 am y 4:00 pm. Sábado y domingo, cada 30 minutos de 7:00 am a 5:00 pm.
+- **Horarios:** todos los días, cada 30 minutos, de 8:00 am a 7:00 pm (última hora para iniciar).
 - **Duración:** cada cita dura 2 horas, así que una cita a las 10:00 bloquea de 10:00 a 12:00.
 - **Límite por número:** máximo 2 solicitudes futuras activas por celular, para evitar que alguien aparte muchos horarios.
 - **Privacidad:** el sitio solo recibe fecha y hora de los horarios ocupados, nunca nombres ni teléfonos.
 
-Para cambiar la duración o el límite, edita `CONFIG` al inicio de `Code.gs`. La duración se cambia también en `DURATION_MIN` dentro de `index.html`. Después de editar el script, ve a **Implementar → Administrar implementaciones → editar (lápiz) → Versión: Nueva versión → Implementar**. La URL se mantiene igual.
+Para cambiar el horario, la duración o el límite, edita `CONFIG` al inicio de `Code.gs`. El horario y la duración se cambian también en `index.html` (`OPEN_MIN`, `LAST_START_MIN`, `STEP_MIN` y `DURATION_MIN`). Después de editar el script, ve a **Implementar → Administrar implementaciones → editar (lápiz) → Versión: Nueva versión → Implementar**. La URL se mantiene igual.

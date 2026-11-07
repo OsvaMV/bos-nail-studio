@@ -85,16 +85,14 @@
     --rule-dark:rgba(247,245,240,.16);     /* separadores sobre negro */
     --field-line:rgba(247,245,240,.45);    /* borde de campos sobre negro (3:1+) */
     --error-on-dark:#E8857A;
-    --accent-text:var(--gold-ink);         /* acento de texto según la superficie */
     --focus:var(--gold-ink);
   }
   /* superficies oscuras: el dorado brillante sí alcanza contraste */
   header,.hero,.booking,footer,.lightbox,.schedule-side,.cred-card,.wa-float{
-    --accent-text:var(--gold);
     --focus:var(--gold);
   }
   /* tarjeta clara dentro de un panel oscuro */
-  .whatsapp-note{--accent-text:var(--gold-ink);--focus:var(--gold-ink);}
+  .whatsapp-note{--focus:var(--gold-ink);}
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
@@ -458,10 +456,6 @@
   .schedule-row:last-child{border-bottom:none;}
   .schedule-row .day{color:var(--ink);letter-spacing:.03em;}
   .schedule-row .hrs{color:var(--ink-soft);text-align:right;}
-  .schedule-row .tag{
-    font-family:var(--font-label);font-size:var(--fs-label);letter-spacing:var(--track-button);text-transform:uppercase;
-    color:var(--accent-text);border:1px solid var(--line);padding:3px 8px;margin-left:10px;white-space:nowrap;
-  }
   .schedule-side{
     background:var(--wine);color:var(--cream);
     padding:36px 32px;display:flex;flex-direction:column;justify-content:center;gap:16px;
@@ -609,9 +603,8 @@
   }
 
   @media (max-width:600px){
-    /* horarios: un renglón por día; la explicación de fijo/flexible vive en el panel */
+    /* horarios: un renglón por día */
     .schedule-row{padding:14px 20px;flex-wrap:nowrap;}
-    .schedule-row .tag{display:none;}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -655,7 +648,7 @@
     </div>
     <div class="today">
       <span class="today-dot" aria-hidden="true"></span>
-      <p class="today-text" id="todayText"><strong>Lunes a viernes</strong> 7:00 am y 4:00 pm · <strong>Sábado y domingo</strong> de 7:00 am a 5:00 pm</p>
+      <p class="today-text" id="todayText"><strong>Todos los días</strong> de 8:00 am a 7:00 pm</p>
       <a href="#cita" class="today-link" id="todayLink">Agendar<svg aria-hidden="true" focusable="false"><use href="#ico-arrow"></use></svg></a>
     </div>
   </div>
@@ -794,21 +787,21 @@
       <div>
         <h2>Horarios de atención</h2>
       </div>
-      <p class="section-note">Entre semana con horario fijo, fines de semana con horario flexible.</p>
+      <p class="section-note">Atiendo los siete días de la semana, con cita.</p>
     </div>
     <div class="schedule-wrap">
       <div class="schedule-list">
-        <div class="schedule-row"><span class="day">Lunes</span><span class="hrs">7:00 am &nbsp;/&nbsp; 4:00 pm <span class="tag">Horario fijo</span></span></div>
-        <div class="schedule-row"><span class="day">Martes</span><span class="hrs">7:00 am &nbsp;/&nbsp; 4:00 pm <span class="tag">Horario fijo</span></span></div>
-        <div class="schedule-row"><span class="day">Miércoles</span><span class="hrs">7:00 am &nbsp;/&nbsp; 4:00 pm <span class="tag">Horario fijo</span></span></div>
-        <div class="schedule-row"><span class="day">Jueves</span><span class="hrs">7:00 am &nbsp;/&nbsp; 4:00 pm <span class="tag">Horario fijo</span></span></div>
-        <div class="schedule-row"><span class="day">Viernes</span><span class="hrs">7:00 am &nbsp;/&nbsp; 4:00 pm <span class="tag">Horario fijo</span></span></div>
-        <div class="schedule-row"><span class="day">Sábado</span><span class="hrs">7:00 am — 5:00 pm <span class="tag">Flexible</span></span></div>
-        <div class="schedule-row"><span class="day">Domingo</span><span class="hrs">7:00 am — 5:00 pm <span class="tag">Flexible</span></span></div>
+        <div class="schedule-row"><span class="day">Lunes</span><span class="hrs">8:00 am — 7:00 pm</span></div>
+        <div class="schedule-row"><span class="day">Martes</span><span class="hrs">8:00 am — 7:00 pm</span></div>
+        <div class="schedule-row"><span class="day">Miércoles</span><span class="hrs">8:00 am — 7:00 pm</span></div>
+        <div class="schedule-row"><span class="day">Jueves</span><span class="hrs">8:00 am — 7:00 pm</span></div>
+        <div class="schedule-row"><span class="day">Viernes</span><span class="hrs">8:00 am — 7:00 pm</span></div>
+        <div class="schedule-row"><span class="day">Sábado</span><span class="hrs">8:00 am — 7:00 pm</span></div>
+        <div class="schedule-row"><span class="day">Domingo</span><span class="hrs">8:00 am — 7:00 pm</span></div>
       </div>
       <div class="schedule-side">
         <span class="display">¿Cómo funciona?</span>
-        <p>De lunes a viernes solo hay dos horarios disponibles: 7:00 am y 4:00 pm. Sábado y domingo puedes elegir cualquier hora entre las 7:00 am y las 5:00 pm.</p>
+        <p>Elige el día que prefieras y un horario entre las 8:00 am y las 7:00 pm, cada 30 minutos. Solo verás los horarios que siguen libres.</p>
         <a href="#cita" class="btn btn-solid">Agendar cita</a>
         <p class="place"><strong>Estudio en casa, en Nicolás Romero, Edo. Méx.</strong> Te comparto la dirección exacta por WhatsApp al confirmar tu cita.</p>
         <div class="whatsapp-note">
@@ -1133,7 +1126,7 @@
   // agenda de citas
   // BOOKING_API: URL de la aplicación web de Google Apps Script (ver agenda/README.md).
   // Mientras esté vacía, el formulario envía por Formspree y no puede saber qué horarios están ocupados.
-  const BOOKING_API = '';
+  const BOOKING_API = 'https://script.google.com/macros/s/AKfycbw5Bjkp5dYDK6Elsz5ganGWGTJfxW5pCh9D7uS9WtVpduwpSSkhEKa5Z5ylis9wEHvFgQ/exec';
   const DURATION_MIN = 120; // duración de cada cita; debe coincidir con agenda/Code.gs
   const PREFETCH_DAYS = 14;
 
@@ -1161,11 +1154,13 @@
     telInput.value = telInput.value.replace(/\D/g, '').slice(0, 10);
   });
 
-  // horarios: entre semana solo 7:00 am y 4:00 pm; fin de semana cada 30 min de 7:00 am a 5:00 pm
-  function slotsFor(isWeekend){
-    if (!isWeekend) return ['07:00', '16:00'];
+  // horarios: todos los días, cada 30 min de 8:00 am a 7:00 pm (última hora para iniciar)
+  const OPEN_MIN = 8 * 60;
+  const LAST_START_MIN = 19 * 60;
+  const STEP_MIN = 30;
+  function slotsFor(){
     const out = [];
-    for (let m = 7 * 60; m <= 17 * 60; m += 30) out.push(pad(Math.floor(m / 60)) + ':' + pad(m % 60));
+    for (let m = OPEN_MIN; m <= LAST_START_MIN; m += STEP_MIN) out.push(pad(Math.floor(m / 60)) + ':' + pad(m % 60));
     return out;
   }
 
@@ -1198,8 +1193,7 @@
   function availableSlots(iso, now = new Date()){
     const today = toISODate(now);
     if (iso < today) return [];
-    const day = new Date(iso + 'T00:00:00').getDay(); // 0 domingo ... 6 sábado
-    let list = slotsFor(day === 0 || day === 6);
+    let list = slotsFor();
     if (iso === today){
       const limit = now.getHours() * 60 + now.getMinutes() + 60;
       list = list.filter(t => toMinutes(t) >= limit);
@@ -1270,7 +1264,7 @@
       const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + offset);
       const iso = toISODate(d);
       const list = availableSlots(iso, now);
-      if (list.length) return { d, iso, offset, weekend: d.getDay() === 0 || d.getDay() === 6, list };
+      if (list.length) return { d, iso, offset, list };
     }
     return null;
   }
@@ -1281,9 +1275,8 @@
     const when = a.offset === 0 ? 'Hoy ' + dayName : a.offset === 1 ? 'Mañana ' + dayName : 'El ' + dayName;
     let detail;
     if (a.list.length === 1) detail = 'queda el horario de las ' + label12(a.list[0]);
-    else if (a.weekend && !(booked.get(a.iso) || []).length) detail = 'puedes pedir cita de ' + label12(a.list[0]) + ' a ' + label12(a.list[a.list.length - 1]);
-    else if (a.weekend) detail = 'primer horario libre a las ' + label12(a.list[0]);
-    else detail = 'horarios a las ' + label12(a.list[0]) + ' y ' + label12(a.list[1]);
+    else if (!(booked.get(a.iso) || []).length) detail = 'puedes pedir cita de ' + label12(a.list[0]) + ' a ' + label12(a.list[a.list.length - 1]);
+    else detail = 'primer horario libre a las ' + label12(a.list[0]);
     todayText.innerHTML = '<strong>' + when + '</strong> · ' + detail;
     todayLink.dataset.date = a.iso;
     todayLink.setAttribute('aria-label', 'Agendar cita para ' + (a.offset === 0 ? 'hoy' : a.offset === 1 ? 'mañana' : 'el ' + dayName));

@@ -18,7 +18,7 @@ Estudio independiente atendido personalmente por la técnica, una clienta a la v
 ## Operating Context
 - Atención en estudio dentro de casa. En el sitio se muestra solo la zona; la dirección exacta se comparte por WhatsApp al confirmar.
 - Toda solicitud queda pendiente hasta confirmarse por WhatsApp.
-- Horario: lunes a viernes solo dos turnos (7:00 am y 4:00 pm); sábado y domingo cualquier hora entre 7:00 am y 5:00 pm.
+- Horario: todos los días, cada 30 minutos, de 8:00 am a 7:00 pm (última hora para iniciar una cita).
 - El formulario envía a Formspree (`https://formspree.io/f/xyegejqn`) mientras no esté conectada la agenda.
 - Agenda: Google Sheets + Apps Script (`agenda/Code.gs`, instalación en `agenda/README.md`). Cada solicitud aparta su horario al recibirse (Estado "Pendiente"); citas de 2 horas; máximo 2 solicitudes futuras por celular. Se conecta poniendo la URL en `BOOKING_API` dentro de `index.html`.
 
